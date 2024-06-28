@@ -1,0 +1,81 @@
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - tabler.github.io - a responsive, flat and full featured admin template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <link href="{% static 'assets/css/dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/custom.css' %}" rel="stylesheet"> <!-- Custom CSS for styling -->
+    <script src="{% static 'assets/js/require.min.js' %}"></script>
+    <script>
+        requirejs.config({
+            baseUrl: '.'
+        });
+    </script>
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+    <link href="{% static 'assets/plugins/charts-c3/plugin.css' %}" rel="stylesheet">
+    <script src="{% static 'assets/plugins/charts-c3/plugin.js' %}"></script>
+    <link href="{% static 'assets/plugins/maps-google/plugin.css' %}" rel="stylesheet">
+    <script src="{% static 'assets/plugins/maps-google/plugin.js' %}"></script>
+    <script src="{% static 'assets/plugins/input-mask/plugin.js' %}"></script>
+</head>
+<body class="">
+<div class="page">
+    <div class="page-single">
+        <div class="container">
+            <div class="row">
+                <div class="col col-login mx-auto">
+                    <div class="text-center mb-6">
+                        <img src="{% static 'assets/images/tabler.svg' %}" class="h-6" alt="Tabler Logo">
+                    </div>
+                    <form method="post" class="card" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+                        <div class="card-body p-6">
+                            <div class="card-title">Create new account</div>
+                            
+                            {% if SOCIALACCOUNT_ENABLED %}
+                            <div class="form-group">
+                                {% providers_media_js %}
+                                {% include 'socialaccount/snippets/provider_list.html' %}
+                                
+                                <!-- Example: Custom styled buttons -->
+                                <div class="social-buttons">
+                                    {% for provider in socialaccount.providers %}
+                                        <button><a href="{% provider_login_url provider.id %}" class="btn btn-social btn-{{ provider.id }}">
+                                            Sign up with {{ provider.name }}
+                                        </a></button>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            <hr>
+                            {{ form|crispy }}
+                            <div class="form-group">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" required>
+                                    <span class="custom-control-label">Agree to the <a href="terms.html">terms and policy</a></span>
+                                </label>
+                            </div>
+                            <div class="form-footer">
+                                <button type="submit" class="btn btn-primary btn-block">Create account</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text-center text-muted">
+                        Already have an account? <a href="{% url 'account_login' %}">Sign in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

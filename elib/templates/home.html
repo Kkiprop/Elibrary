@@ -1,0 +1,54 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block start %}
+
+
+
+<div class="my-3 my-md-5">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">
+          Available Books
+        </h1>
+        {% comment %} <div class="page-subtitle">1 - 12 of 1713 photos</div> {% endcomment %}
+        <div class="page-options d-flex">
+          {% comment %} <select class="form-control custom-select w-auto">
+            <option value="asc">Newest</option>
+            <option value="desc">Oldest</option>
+          </select> {% endcomment %}
+          <div class="input-icon ml-2">
+            {% comment %} <span class="input-icon-addon">
+              <i class="fe fe-search"></i>
+            </span> {% endcomment %}
+            {% comment %} <input type="text" class="form-control w-10" placeholder="Search photo"> {% endcomment %}
+          </div>
+        </div>
+      </div>
+      <div class="row row-cards">
+        {% for book in books %}
+        <div class="col-sm-6 col-lg-4">
+          <div class="card p-3">
+            {% if book.thumbnail %}
+            <a href="{{ book.get_absolute_url }}" class="mb-3">
+              <img src="{{ book.thumbnail.url }}" alt="Photo by Nathan Guerrero" class="rounded">
+            </a>
+            {% endif %}
+            <div class="d-flex align-items-center px-2">
+              {% comment %} <div class="avatar avatar-md mr-3" style="background-image: url(demo/faces/male/41.jpg)"></div> {% endcomment %}
+              <div>
+                <div><a href="{{ book.get_absolute_url }}">{{ book.title }}</div>
+                <small class="d-block text-muted">{{ book.author }}</small>
+              </div>
+              <div class="ml-auto text-muted">
+                <a href="" class="icon d-none d-md-inline-block ml-3">Ksh. {{ book.price }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock start %}

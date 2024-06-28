@@ -1,0 +1,83 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block start %}
+{% load crispy_forms_tags %}
+
+<div class="my-3 my-md-5">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">#INV0015</h3>
+          <div class="card-options">
+            <button type="button" class="btn btn-primary" onclick="javascript:window.print();"><i class="si si-printer"></i> Print Invoice</button>
+          </div>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <div class="card-body">
+            <div class="row my-8">
+              <div class="col-6">
+                <p class="h3">E-Library</p>
+                <address>
+                  Elibrary Road<br>
+                  80100<br>
+                  Mombasa, Kenya<br>
+                  sales@elibrary.com
+                </address>
+              </div>
+              <div class="col-6 text-right">
+                <p class="h3">Client</p>
+                <address>
+                  Street Address<br>
+                  State, City<br>
+                  Region, Postal Code<br>
+                  ctr@example.com
+                </address>
+              </div>
+            </div>
+            <div class="table-responsive push">
+              {% if cart %}
+              <table class="table table-bordered table-hover">
+                <tr>
+                  <th class="text-center" style="width: 1%"></th>
+                  <th>Product</th>
+                  <th class="text-center" style="width: 1%">Qnt</th>
+                  <th class="text-right" style="width: 1%">Unit</th>
+                  <th class="text-right" style="width: 1%">Amount</th>
+                </tr>
+
+                {% for item in cart.items.all %}
+                <tr>
+                  <td class="text-center">
+                    <a class="icon" href="{% url 'elib:remove_from_cart' item.id %}">
+                      <i class="fe fe-trash-2"></i>
+                    </a></td>
+                  <td>
+                    <p class="font-w600 mb-1">{{ item.book.title }}</p>
+                    {% comment %} <div class="text-muted">Logo and business cards design</div> {% endcomment %}
+                  </td>
+                  <td class="text-center">
+                  {{ item.quantity }} 
+                  </td>
+                  <td class="text-right">Ksh. {{ item.book.price }} x {{ item.quantity }}</td>
+                  <td class="text-right">Ksh. {{ item.book.price }} </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                  <td colspan="4" class="font-weight-bold text-uppercase text-right">Total Due</td>
+                  <td class="font-weight-bold text-right">Ksh. {{ total_price }}</td>
+                </tr>
+              </table>
+              {% endif %}
+            </div>
+            <div class="card-options">
+              <button type="submit" class="btn btn-primary m-3" ><i class="si si-printer"></i> Checkout</button>
+              <a href="{% url 'elib:home' %}"><button type="button" class="btn btn-success m-3 " > Continue Shopping</button></a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+{% endblock start %}
