@@ -69,3 +69,6 @@ You are free to use, modify, and distribute this project.
 
 ## 🔗 Live Repo
 [GitHub Repository](https://github.com/Kkiprop/Elibrary)
+
+## 📜 Screenshots
+https://github.com/Kkiprop/Elibrary/issues/1#issue-3448356044
