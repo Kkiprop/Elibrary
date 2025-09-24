@@ -72,3 +72,4 @@ You are free to use, modify, and distribute this project.
 
 ## 📜 Screenshots
 https://github.com/Kkiprop/Elibrary/issues/1#issue-3448356044
+https://github.com/Kkiprop/Elibrary/issues/1
