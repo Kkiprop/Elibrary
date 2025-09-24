@@ -71,4 +71,4 @@ You are free to use, modify, and distribute this project.
 [GitHub Repository](https://github.com/Kkiprop/Elibrary)
 
 ## 📜 Screenshots
-![App Screenshot](https://github.com/Kkiprop/Elibrary/issues/1#issue-3448356044?raw=true)
+![App Screenshot](https://github.com/Kkiprop/Elibrary/issues/1#issue-3448356044)
